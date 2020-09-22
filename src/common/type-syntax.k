@@ -20,8 +20,8 @@ module TYPE-SYNTAX
     syntax IdList                    ::= List{Id,"."}   [klabel('IdList)]
 
 
-    syntax Dim ::= "[" "]"
-    syntax Dims ::= List{Dim, ""}
+    syntax Dim ::= "[" "]"                  [klabel('Dim)]
+    syntax Dims ::= List{Dim, ""}           [klabel('DimList)]
     syntax ArrayType ::= Type "[" "]"
     syntax Type ::= TypeName | ArrayType
 

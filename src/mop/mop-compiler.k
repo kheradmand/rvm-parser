@@ -24,8 +24,7 @@ module MOP-COMPILER-SYNTAX
 
 
 
-
-        syntax IdPattern ::=  //id  with * and .. wildcards (it can start with * but not with .. , same about end)
+    syntax IdPattern ::=  //id  with * and .. wildcards (it can start with * but not with .. , same about end)
                    // r"(?<!([A-Za-z0-9\\_]|\\*))([A-Za-z\\_]|\\*)([A-Za-z0-9\\_]|(\\.\\.)|\\*|\\.)*([A-Za-z\\_]|\\*)"     [token]
                      r"(?<!([A-Za-z0-9\\_]|\\*))([A-Za-z\\_]|\\*)([A-Za-z0-9\\_]|(\\.\\.)|\\*)*([A-Za-z\\_]|\\*)"     [token,reject2("new"), klabel('IdPattern)]
                    | r"(?<!([A-Za-z0-9\\_]|\\*))([A-Za-z\\_]|\\*)" [token,klabel('IdPatternSingleChar)]
@@ -35,6 +34,11 @@ endmodule
 module MOP-COMPILER
     imports MOP-SYNTAX
 
-    configuration <T> <k> $PGM:MOP  </k> </T>
-    rule <k> `X:OptionalPackageDec => .K` ...</k>
+    syntax K ::= "$head"
+    //syntax K ::= extract(SpecDec) [function]
+
+    configuration <T> <k> $PGM:MOP  </k>    </T>
+
+    rule <k> `X:OptionalPackageDec Y:ImportDecList Z:SpecDec => Z` </k>
+
 endmodule

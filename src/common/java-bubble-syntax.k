@@ -14,9 +14,11 @@ module JAVA-BUBBLE-SYNTAX
     syntax BlockBubble //::=    "{" BalancedBracket "}" [prefer, token, klabel('BlockBubble)]
                          //   | "{" "}" [prefer, token, klabel('BlockBubbleEmpty)]
 
-    syntax DecStart ::= IdModifier | IdModifier DecStart
+    syntax DecStart ::=   IdModifier          [klabel('DecStartSingle)]
+                        | IdModifier DecStart [klabel('DecStartComp)]
 
-    syntax IdModifier ::= Id | JavaModifier
+    syntax IdModifier ::=     Id            [klabel('IdModId)]
+                            | JavaModifier  [klabel('IdModMod)]
 
 	syntax ClassDecBubble ::= DecStart BlockBubble
 
@@ -45,10 +47,10 @@ module JAVA-BUBBLE-SYNTAX
 	                         //| "<" [token, klabel('NoParenthesesSingleLT)]
 
 	syntax BalancedParentheses ::=
-                                   "(" BalancedParentheses ")"
+                                   "(" BalancedParentheses ")" [klabel('BParenthesesOuterParantheses)]
                                  | BalancedParentheses BalancedParentheses [left, klabel('BParenthesesCombination)]
-                                 | NoParentheses
-                                 | "(" ")"
+                                 | NoParentheses [klabel('BParenthesesNoParantheses)]
+                                 | "(" ")" [klabel('BParenthesesEmptyParantheses)]
 
     syntax BoolExpBubble //::= BalancedParentheses [token, klabel('BoolExpBubble)] //TODO:removed prefer (for MOP production), check amb
 

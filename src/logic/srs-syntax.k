@@ -18,8 +18,10 @@ syntax Rule ::= SRSLeftHandSide "->" SRSRightHandSide
 syntax SRSLeftHandSide ::= OptionalBegin SRSString OptionalEnd
 syntax SRSRightHandSide ::= SRSString | "#" SRSState | "#epsilon"
 
-syntax OptionalBegin ::= "^" | None
-syntax OptionalEnd ::= "$" | None
+syntax OptionalBegin ::= "^"   [klabel('OpBeginSome)]
+                        | None [klabel('OpBeginNone)]
+syntax OptionalEnd ::= "$"     [klabel('OpEndSome)]
+                        | None [klabel('OpEndNone)]
 syntax None
 
 syntax SRSString ::= Id | Id SRSString

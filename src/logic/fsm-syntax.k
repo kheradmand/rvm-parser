@@ -12,7 +12,8 @@ syntax FSMFormula ::= ItemList AliasList
 syntax LogicState ::= StateName | GroupName | "fail"
 
 syntax Item ::= StateName "[" TransitionList "]"
-syntax Transition ::= EventName "->" StateName | "default" StateName
+syntax Transition ::=     EventName "->" StateName  [klabel('Transition)]
+                        | "default" StateName       [klabel('TransitionDefault)]
 
 syntax Alias ::= "alias" GroupName "=" StateNameList
 
